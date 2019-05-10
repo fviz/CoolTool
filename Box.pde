@@ -5,6 +5,11 @@ class Box {
     color baseColor;
     PVector dimensions;
     String type;
+    ArrayList<PVector> corners = new ArrayList<PVector>();
+    PVector corner1;
+    PVector corner2;
+    PVector corner3;
+    PVector corner4;
 
     int distanceFromOrigin = width / 2;
 
@@ -15,13 +20,27 @@ class Box {
         dimensions.y = dimensions.x / 2;
         location.x += random(distanceFromOrigin);
         location.y += random(distanceFromOrigin);
-        if (location.x + dimensions.x > width) {
-            rotationAngle = 0;
-        } else if (location.x + dimensions.x * 1.5 < 0) {
-            rotationAngle = 0;
-        } else {
-            rotationAngle = floor(random(0, 90));
+        corner1 = new PVector(location.x, location.y);
+        corner2 = new PVector(location.x + dimensions.x, location.y);
+        corner3 = new PVector(location.x, location.y + dimensions.y);
+        corner4 = new PVector(location.x + dimensions.x, location.y + dimensions.y);
+        corners.add(corner1);
+        corners.add(corner2);
+        corners.add(corner3);
+        corners.add(corner4);
+
+        for (PVector corner : corners) {
+          if (corner.x > width || corner.x < 0) {
+            if (corner.y > height || corner.y < 0) {
+              // rotationAngle = 0;
+            } else {
+                // rotationAngle = floor(random(0, 90));
+            }
+          }
         }
+
+
+
         baseColor = inputColor;
 
         if (random(1) > 0.5) {
